@@ -1,10 +1,29 @@
 const { model, Schema } = require('mongoose');
 
+const orderSchema = new Schema({
+    products: {
+        type: [{
+            name: String,
+            amount: Number,
+        }],
+        required: [true, 'The products of the order are required'],
+    },
+    table: {
+        type: Number,
+        required: [true, 'The number of the table of the order is required'],
+    },
+    received: {
+        type: Boolean,
+        default: false,
+    },
+});
+
 const tableSchema = new Schema({
     number: {
         type: Number,
-    }
-})
+        required: [true, 'The number of the table is required'],
+    },
+});
 
 const companySchema = new Schema({
     name: {
@@ -18,7 +37,10 @@ const companySchema = new Schema({
     },
     tables: {
         type: [tableSchema],
-    }
+    },
+    orders: {
+        type: [orderSchema],
+    },
 });
 
 /* eslint-disable func-names */
