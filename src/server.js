@@ -2,10 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
+const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 
 const { dbConnector } = require('./data-access');
 const socketControl = require('./socket-control');
-const { orderRouter, companyRouter, authRouter } = require('./routes');
+const {
+    orderRouter,
+    tableRouter,
+    authRouter,
+    menuRouter,
+} = require('./routes');
 
 class ServerModel {
     constructor() {
@@ -28,10 +35,15 @@ class ServerModel {
     }
 
     middlewares() {
-        this.app.use(express.static('public'));
+        this.app.use('/api', express.static('public'));
         this.app.use(express.json());
         this.app.use(cors({
             credentials: true,
+        }));
+        this.app.use(cookieParser());
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
         }));
     }
 
@@ -41,8 +53,9 @@ class ServerModel {
 
     routes() {
         this.app.use('/api/order', orderRouter);
-        this.app.use('/api/company', companyRouter);
+        this.app.use('/api/table', tableRouter);
         this.app.use('/api/auth', authRouter);
+        this.app.use('/api/menu', menuRouter);
     }
 
     listen() {

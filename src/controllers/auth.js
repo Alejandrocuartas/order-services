@@ -1,6 +1,6 @@
 const { request, response } = require('express');
 
-const { googleAuth } = require('../use-cases');
+const { googleAuth, deleteGoogleLogin } = require('../use-cases');
 
 const googleLogin = async (req = request, res = response) => {
     const { googleToken } = req.body;
@@ -20,6 +20,22 @@ const googleLogin = async (req = request, res = response) => {
     }
 };
 
+const deleteGLogin = async (req = request, res = response) => {
+    try {
+        const { companyId } = req;
+        await deleteGoogleLogin(companyId);
+        res.status(200).json({
+            message: 'Company deleted correctly',
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'could not delete company',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     googleLogin,
+    deleteGLogin,
 };

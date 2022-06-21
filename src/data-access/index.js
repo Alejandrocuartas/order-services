@@ -8,7 +8,6 @@ const dbConnector = async () => {
     } catch (error) {
     /* eslint-disable no-console */
         console.log(error);
-        throw new Error('Error when connecting database');
     }
 };
 

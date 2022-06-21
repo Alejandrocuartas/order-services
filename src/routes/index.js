@@ -1,9 +1,11 @@
 const orderRouter = require('./order');
-const companyRouter = require('./company');
+const tableRouter = require('./table');
 const authRouter = require('./auth');
+const menuRouter = require('./menu');
 
 module.exports = {
     orderRouter,
-    companyRouter,
+    tableRouter,
     authRouter,
+    menuRouter,
 };

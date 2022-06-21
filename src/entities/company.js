@@ -16,6 +16,13 @@ const orderSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    paid: {
+        type: Boolean,
+        default: false,
+    },
+    price: {
+        type: Number,
+    },
 });
 
 const tableSchema = new Schema({
@@ -40,6 +47,10 @@ const companySchema = new Schema({
     },
     orders: {
         type: [orderSchema],
+    },
+    active: {
+        type: Boolean,
+        default: true,
     },
 });
 
