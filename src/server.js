@@ -19,7 +19,9 @@ class ServerModel {
         this.app = express();
         this.port = process.env.PORT;
         this.server = createServer(this.app);
-        this.io = new Server(this.server);
+        this.io = new Server(this.server, {
+            cors: ['http://localhost:8080'],
+        });
 
         this.dbConnector();
 
@@ -39,6 +41,7 @@ class ServerModel {
         this.app.use(express.json());
         this.app.use(cors({
             credentials: true,
+            origin: ['http://localhost:8080'],
         }));
         this.app.use(cookieParser());
         this.app.use(fileUpload({
