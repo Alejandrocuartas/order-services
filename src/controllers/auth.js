@@ -15,7 +15,7 @@ const googleLogin = async (req = request, res = response) => {
             });
     } catch (error) {
         res.status(401).json({
-            error,
+            error: error.message,
         });
     }
 };

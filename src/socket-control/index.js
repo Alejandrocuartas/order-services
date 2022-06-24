@@ -2,15 +2,19 @@ const { getOrder } = require('../use-cases');
 const { sessionHandler } = require('../helpers');
 
 const socketControl = (socket) => {
-    socket.on('get-orders', async (jwt) => {
+    socket.on('get-orders', async (jwt, callback) => {
         try {
             const companyId = sessionHandler(jwt);
             const orders = await getOrder(companyId);
-            socket.emit('orders', {
+            callback({
                 orders,
-            });
+                error: false
+            })
         } catch (error) {
-            socket.emit('orders', null);
+            callback({
+                error: true,
+                message: error.message
+            })
         }
     });
 };
