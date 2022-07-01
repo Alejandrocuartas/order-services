@@ -11,7 +11,8 @@ const editProduct = async (company, id, newPrice) => {
         });
         menu.products = products;
         await menu.save();
-        return products;
+        const editedProduct = products.filter((p) => p.id.toString() === id);
+        return editedProduct[0];
     } catch (error) {
         throw new Error(error.message);
     }

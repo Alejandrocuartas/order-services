@@ -13,7 +13,7 @@ const createProduct = async (company, imgPath, name, price = 0) => {
         };
         menu.products.push(newProduct);
         await menu.save();
-        return newProduct;
+        return menu.products;
     } catch (error) {
         throw new Error(error.message);
     }

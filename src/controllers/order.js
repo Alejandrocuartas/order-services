@@ -15,7 +15,7 @@ const postOrder = async (req = request, res = response) => {
             name: product.name,
             amount: product.amount,
         }));
-        const created = await createOrder(companyId, {
+        const { created, orders } = await createOrder(companyId, {
             table,
             products: productsList,
             price: totalPrice,
@@ -23,6 +23,7 @@ const postOrder = async (req = request, res = response) => {
         if (created) {
             return res.json({
                 message: 'Order created.',
+                orders,
             });
         }
         throw new Error('Unexpected error.');

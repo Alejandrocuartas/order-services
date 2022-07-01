@@ -13,6 +13,8 @@ const existingTable = require('./middlewares/existTable');
 const createOrder = require('./order/createOrder');
 const getOrder = require('./order/getOrder');
 const payOrder = require('./order/payOrder');
+const getProducts = require('./menu/getProducts');
+const getCompanyData = require('./auth/getCompanyData');
 
 module.exports = {
     googleAuth,
@@ -30,4 +32,6 @@ module.exports = {
     createOrder,
     getOrder,
     payOrder,
+    getProducts,
+    getCompanyData,
 };

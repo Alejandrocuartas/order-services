@@ -8,9 +8,14 @@ const {
     postProduct,
     deleteProduct,
     patchProduct,
+    getMenu,
 } = require('../controllers/menu');
 
 const router = Router();
+
+router.get('/', [
+    session,
+], getMenu);
 
 router.post('/', [
     session,

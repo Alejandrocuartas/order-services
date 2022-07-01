@@ -8,14 +8,18 @@ const socketControl = (socket) => {
             const orders = await getOrder(companyId);
             callback({
                 orders,
-                error: false
-            })
+                error: false,
+            });
         } catch (error) {
             callback({
                 error: true,
-                message: error.message
-            })
+                message: error.message,
+                orders: [],
+            });
         }
+    });
+    socket.on('new-order', (orders) => {
+        socket.broadcast.emit('new-orders', orders);
     });
 };
 

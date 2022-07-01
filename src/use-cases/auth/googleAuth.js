@@ -7,6 +7,8 @@ const googleAuth = async (googleToken) => {
         const companyData = await googleValidator(googleToken);
         const existingUser = await Company.findOne({ email: companyData.email });
         if (existingUser) {
+            existingUser.active = true;
+            existingUser.save();
             const jwt = await jwtGenerator(existingUser.id);
             return jwt;
         }

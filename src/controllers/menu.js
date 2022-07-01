@@ -6,14 +6,31 @@ const {
     createProduct,
     deletProduct,
     editProduct,
+    getProducts,
 } = require('../use-cases');
+
+const getMenu = async (req = request, res = response) => {
+    try {
+        const { companyId } = req;
+        const menu = await getProducts(companyId);
+        res.status(200).json({
+            menu,
+        });
+    } catch (error) {
+        res.status(404).json({
+            message: 'Could not get menu.',
+            error: error.message,
+        });
+    }
+};
 
 const postMenu = async (req = request, res = response) => {
     try {
         const { companyId } = req;
-        await createMenu(companyId);
+        const menu = await createMenu(companyId);
         res.status(200).json({
             message: 'Menu created correctly',
+            menu,
         });
     } catch (error) {
         res.status(500).json({
@@ -43,9 +60,10 @@ const postProduct = async (req = request, res = response) => {
         const { tempFilePath } = req.files.productImage;
         const { companyId } = req;
         const { name, price } = req.body;
-        await createProduct(companyId, tempFilePath, name, price);
+        const products = await createProduct(companyId, tempFilePath, name, price);
         res.status(200).json({
             message: 'Product created correctly',
+            products,
         });
     } catch (error) {
         res.status(500).json({
@@ -77,10 +95,10 @@ const patchProduct = async (req = request, res = response) => {
         const { companyId } = req;
         const { id } = req.params;
         const { newPrice } = req.body;
-        const products = await editProduct(companyId, id, newPrice);
+        const product = await editProduct(companyId, id, newPrice);
         res.status(200).json({
             message: 'product price updated correctly.',
-            products,
+            product,
         });
     } catch (error) {
         res.status(500).json({
@@ -96,4 +114,5 @@ module.exports = {
     postProduct,
     deleteProduct,
     patchProduct,
+    getMenu,
 };
