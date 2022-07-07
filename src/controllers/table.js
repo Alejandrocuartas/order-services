@@ -3,11 +3,13 @@ const { response, request } = require('express');
 const { saveTable, getTablesList, deleteTable } = require('../use-cases');
 
 const postTable = async (req = request, res = response) => {
-    const { companyId, body } = req;
     try {
-        await saveTable(companyId, body);
+        const { companyId, body } = req;
+        const { tempFilePath } = req.files.qr;
+        const tables = await saveTable(companyId, body, tempFilePath);
         return res.status(200).json({
             message: 'the table was saved.',
+            tables: tables.reverse(),
         });
     } catch (error) {
         return res.status(500).json({
@@ -20,10 +22,11 @@ const postTable = async (req = request, res = response) => {
 const getTables = async (req = request, res = response) => {
     const { companyId } = req;
     try {
-        const tables = await getTablesList(companyId);
+        const { company, tables } = await getTablesList(companyId);
         return res.status(200).json({
             amount: tables.length,
-            tables,
+            tables: tables.reverse(),
+            company,
         });
     } catch (error) {
         return res.status(404).json({
@@ -37,10 +40,10 @@ const deleteT = async (req = request, res = response) => {
     try {
         const { companyId } = req;
         const { number } = req.body;
-        const deletedTable = await deleteTable(companyId, number);
+        const remainingTables = await deleteTable(companyId, number);
         return res.status(200).json({
             message: `table number ${number} deleted.`,
-            remainingTables: deletedTable,
+            remainingTables: remainingTables.reverse(),
         });
     } catch (error) {
         return res.status(404).json({

@@ -9,9 +9,12 @@ const {
     deleteProduct,
     patchProduct,
     getMenu,
+    getMenuClient,
 } = require('../controllers/menu');
 
 const router = Router();
+
+router.get('/:companyId', getMenuClient);
 
 router.get('/', [
     session,

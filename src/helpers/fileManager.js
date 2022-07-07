@@ -9,7 +9,7 @@ const uploadImage = async (imgPath) => {
         });
         return secure_url;
     } catch (error) {
-        throw new Error('could not upload image');
+        throw new Error(error.message);
     }
 };
 
@@ -24,7 +24,19 @@ const deleteImage = async (imgUrl = '') => {
     }
 };
 
+const uploadQr = async (imgPath) => {
+    try {
+        const { secure_url } = await cloudinary.uploader.upload(imgPath, {
+            folder: 'order-qr',
+        });
+        return secure_url;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
 module.exports = {
     uploadImage,
     deleteImage,
+    uploadQr,
 };

@@ -30,6 +30,10 @@ const tableSchema = new Schema({
         type: Number,
         required: [true, 'The number of the table is required'],
     },
+    qr: {
+        type: String,
+        required: [true, 'The qr url is required.'],
+    },
 });
 
 const companySchema = new Schema({

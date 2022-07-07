@@ -24,6 +24,21 @@ const getMenu = async (req = request, res = response) => {
     }
 };
 
+const getMenuClient = async (req = request, res = response) => {
+    try {
+        const { companyId } = req.params;
+        const menu = await getProducts(companyId);
+        res.status(200).json({
+            menu,
+        });
+    } catch (error) {
+        res.status(404).json({
+            message: 'Could not get menu.',
+            error: error.message,
+        });
+    }
+};
+
 const postMenu = async (req = request, res = response) => {
     try {
         const { companyId } = req;
@@ -115,4 +130,5 @@ module.exports = {
     deleteProduct,
     patchProduct,
     getMenu,
+    getMenuClient,
 };

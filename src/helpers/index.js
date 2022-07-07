@@ -1,7 +1,7 @@
 const googleValidator = require('./googleValidator');
 const jwtGenerator = require('./jwtGenerator');
 const sessionHandler = require('./sessionHandler');
-const { uploadImage, deleteImage } = require('./fileManager');
+const { uploadImage, deleteImage, uploadQr } = require('./fileManager');
 
 module.exports = {
     googleValidator,
@@ -9,4 +9,5 @@ module.exports = {
     sessionHandler,
     uploadImage,
     deleteImage,
+    uploadQr,
 };
