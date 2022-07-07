@@ -10,7 +10,7 @@ const googleLogin = async (req = request, res = response) => {
             .header('Access-Control-Allow-Credentials', true)
             .header('Access-Control-Allow-Origin', 'https://ordena.netlify.app')
             .header('access-control-expose-headers', 'Set-Cookie')
-            .cookie('userToken', token, { sameSite: 'none', secure: true })
+            .cookie('userToken', token, { sameSite: 'none', secure: false })
             .json({
                 message: 'Logged correctly',
             });
