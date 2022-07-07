@@ -22,10 +22,7 @@ class ServerModel {
         this.io = new Server(this.server, {
             cors: {
                 origin: 'https://ordena.netlify.app',
-                credentials: true,
-                exposedHeaders: ['Access-Control-Allow-Origin'],
             },
-            
         });
 
         this.dbConnector();
