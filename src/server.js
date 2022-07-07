@@ -21,6 +21,7 @@ class ServerModel {
         this.server = createServer(this.app);
         this.io = new Server(this.server, {
             cors: 'https://ordena.netlify.app',
+            credentials: true,
         });
 
         this.dbConnector();
