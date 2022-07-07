@@ -20,8 +20,10 @@ class ServerModel {
         this.port = process.env.PORT;
         this.server = createServer(this.app);
         this.io = new Server(this.server, {
-            cors: 'https://ordena.netlify.app',
-            credentials: true,
+            cors: {
+                origin: 'https://ordena.netlify.app',
+                credentials: true,
+            },
         });
 
         this.dbConnector();
