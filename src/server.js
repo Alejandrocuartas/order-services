@@ -22,6 +22,9 @@ class ServerModel {
         this.io = new Server(this.server, {
             cors: {
                 origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
+                methods: ["GET","POST"],
+                credentials: true,
+                allowedHeaders: ["Access-Control-Allow-Origin:http://localhost:8080"]
             },
         });
 
