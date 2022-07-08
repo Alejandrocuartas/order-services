@@ -21,7 +21,7 @@ class ServerModel {
         this.server = createServer(this.app);
         this.io = new Server(this.server, {
             cors: {
-                origin: 'https://ordena.netlify.app',
+                origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
             },
         });
 
@@ -42,7 +42,7 @@ class ServerModel {
         this.app.use('/api', express.static('public'));
         this.app.use(express.json());
         this.app.use(cors({
-            origin: ['https://ordena.netlify.app'],
+            origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
             credentials: true,
         }));
         this.app.use(cookieParser());
