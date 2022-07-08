@@ -20,12 +20,7 @@ class ServerModel {
         this.port = process.env.PORT;
         this.server = createServer(this.app);
         this.io = new Server(this.server, {
-            cors: {
-                origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
-                methods: ["GET","POST"],
-                credentials: true,
-                allowedHeaders: ["Access-Control-Allow-Origin:http://localhost:8080"]
-            },
+            cors:  ['https://ordena.netlify.app', 'http://localhost:8080'],
         });
 
         this.dbConnector();
@@ -44,7 +39,10 @@ class ServerModel {
     middlewares() {
         this.app.use('/api', express.static('public'));
         this.app.use(express.json());
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
+            credentials: true
+        }));
         this.app.use(cookieParser());
         this.app.use(fileUpload({
             useTempFiles: true,
