@@ -11,7 +11,7 @@ const googleLogin = async (req = request, res = response) => {
             .header('access-control-expose-headers', 'Set-Cookie')
             .cookie('userToken', token, {
                 sameSite: 'none',
-                secure: true,
+                secure: false,
                 maxAge: 60 * 1000 * 60 * 12,
             })
             .json({
