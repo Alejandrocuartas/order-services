@@ -44,10 +44,7 @@ class ServerModel {
     middlewares() {
         this.app.use('/api', express.static('public'));
         this.app.use(express.json());
-        this.app.use(cors({
-            origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
-            credentials: true,
-        }));
+        this.app.use(cors());
         this.app.use(cookieParser());
         this.app.use(fileUpload({
             useTempFiles: true,
