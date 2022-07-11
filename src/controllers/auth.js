@@ -9,13 +9,7 @@ const googleLogin = async (req = request, res = response) => {
         res.status(200)
             .header('Access-Control-Allow-Credentials', true)
             .header('access-control-expose-headers', 'Set-Cookie')
-            .cookie('userToken', token, {
-                sameSite: 'none',
-                secure: true,
-                maxAge: 60 * 1000 * 60 * 12,
-                domain: process.env.CLIENT_DOMAIN,
-                path: '/',
-            })
+            .cookie('userToken', token)
             .json({
                 message: 'Logged correctly',
             });

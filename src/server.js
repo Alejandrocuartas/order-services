@@ -4,6 +4,7 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const cookieSession = require('cookie-session')
 
 const { dbConnector } = require('./data-access');
 const socketControl = require('./socket-control');
@@ -44,6 +45,14 @@ class ServerModel {
             credentials: true
         }));
         this.app.use(cookieParser());
+        this.app.use(cookieSession({
+            maxAge: 60 * 1000 * 60 * 12,
+            httpOnly: false,
+            domain: process.env.CLIENT_DOMAIN,
+            path: '/',
+            sameSite: 'none',
+            secure: true,
+        }))
         this.app.use(fileUpload({
             useTempFiles: true,
             tempFileDir: '/tmp/',
