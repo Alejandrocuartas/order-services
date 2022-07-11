@@ -13,6 +13,7 @@ const googleLogin = async (req = request, res = response) => {
                 sameSite: 'none',
                 secure: true,
                 maxAge: 60 * 1000 * 60 * 12,
+                domain: 'localhost:3000'
             })
             .json({
                 message: 'Logged correctly',
