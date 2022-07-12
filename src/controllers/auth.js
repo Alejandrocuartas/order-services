@@ -15,6 +15,7 @@ const googleLogin = async (req = request, res = response) => {
                 secure: true,
                 maxAge: 60 * 1000 * 60 * 12,
                 domain: process.env.CLIENT_DOMAIN,
+                path: '/'
             })
             .json({
                 message: 'Logged correctly',
