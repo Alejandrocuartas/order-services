@@ -4,6 +4,7 @@ const { googleAuth, deleteGoogleLogin, getCompanyData } = require('../use-cases'
 
 const googleLogin = async (req = request, res = response) => {
     const { googleToken } = req.body;
+    console.log(process.env.CLIENT_DOMAIN)
     try {
         const token = await googleAuth(googleToken);
         res.status(200)
