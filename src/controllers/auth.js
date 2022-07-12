@@ -7,7 +7,6 @@ const googleLogin = async (req = request, res = response) => {
     try {
         const token = await googleAuth(googleToken);
         res.status(200)
-            .header('Referer', 'http://localhost:8080')
             .header('Access-Control-Allow-Credentials', true)
             .header('access-control-expose-headers', 'Set-Cookie')
             .cookie('userToken', token, {
