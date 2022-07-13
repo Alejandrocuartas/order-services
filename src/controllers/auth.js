@@ -39,6 +39,7 @@ const getAuthData = async (req = request, res = response) => {
         const companyData = await getCompanyData(companyId);
         res.status(200)
         .header('Access-Control-Allow-Credentials', true)
+        .header('Access-Control-Allow-Origin', 'https://ordena.netlify.app')
         .json({
             message: 'Company info.',
             companyData,
