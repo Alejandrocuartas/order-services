@@ -37,7 +37,9 @@ const getAuthData = async (req = request, res = response) => {
     try {
         const { companyId } = req;
         const companyData = await getCompanyData(companyId);
-        res.status(200).json({
+        res.status(200)
+        .header('Access-Control-Allow-Credentials', true)
+        .json({
             message: 'Company info.',
             companyData,
         });
