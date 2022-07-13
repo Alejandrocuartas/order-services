@@ -9,7 +9,7 @@ const googleLogin = async (req = request, res = response) => {
         res.status(200)
             .json({
                 message: 'Logged correctly',
-                userToken: token
+                userToken: token,
             });
     } catch (error) {
         res.status(401).json({
@@ -38,12 +38,10 @@ const getAuthData = async (req = request, res = response) => {
         const { companyId } = req;
         const companyData = await getCompanyData(companyId);
         res.status(200)
-        .header('Access-Control-Allow-Credentials', true)
-        .header('Access-Control-Allow-Origin', 'https://ordena.netlify.app')
-        .json({
-            message: 'Company info.',
-            companyData,
-        });
+            .json({
+                message: 'Company info.',
+                companyData,
+            });
     } catch (error) {
         res.status(500).json({
             message: 'could not get company info',

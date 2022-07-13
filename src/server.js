@@ -16,11 +16,12 @@ const {
 
 class ServerModel {
     constructor() {
+        this.origin = 'https://ordena.netlify.app';
         this.app = express();
         this.port = process.env.PORT;
         this.server = createServer(this.app);
         this.io = new Server(this.server, {
-            cors: ['https://ordena.netlify.app', 'http://localhost:8080'],
+            cors: this.origin,
         });
 
         this.dbConnector();
@@ -40,7 +41,7 @@ class ServerModel {
         this.app.use('/api', express.static('public'));
         this.app.use(express.json());
         this.app.use(cors({
-            origin: ['https://ordena.netlify.app', 'http://localhost:8080'],
+            origin: this.origin,
             credentials: true,
         }));
         this.app.use(cookieParser());
