@@ -4,7 +4,7 @@ const { logger } = require('../utils');
 const { googleAuth, deleteGoogleLogin, getCompanyData } = require('../use-cases');
 
 const googleLogin = async (req = request, res = response) => {
-    logger.info('[POST: /api/auth/glogin]:', 'starting login/signup process...')
+    logger.info('[POST: /api/auth/glogin]: starting login/signup process...')
     try {
         const { googleToken } = req.body;
         const token = await googleAuth(googleToken);
@@ -14,7 +14,7 @@ const googleLogin = async (req = request, res = response) => {
                 userToken: token,
             });
     } catch (error) {
-        logger.error('[POST: /api/auth/glogin]:', error.message)
+        logger.error(`[POST: /api/auth/glogin]: ${error.message}`)
         res.status(401).json({
             error: error.message,
         });
