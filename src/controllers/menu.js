@@ -74,8 +74,8 @@ const postProduct = async (req = request, res = response) => {
     try {
         const { tempFilePath } = req.files.productImage;
         const { companyId } = req;
-        const { name, price } = req.body;
-        const products = await createProduct(companyId, tempFilePath, name, price);
+        const { name, price, description } = req.body;
+        const products = await createProduct(companyId, tempFilePath, name, description, price);
         res.status(200).json({
             message: 'Product created correctly',
             products,

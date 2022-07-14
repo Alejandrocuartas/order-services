@@ -2,7 +2,7 @@ const { Menu } = require('../../entities');
 
 const { uploadImage } = require('../../helpers');
 
-const createProduct = async (company, imgPath, name, price = 0) => {
+const createProduct = async (company, imgPath, name, description, price = 0) => {
     try {
         const image = await uploadImage(imgPath);
         const menu = await Menu.findOne({ company });
@@ -10,6 +10,7 @@ const createProduct = async (company, imgPath, name, price = 0) => {
             name,
             image,
             price,
+            description
         };
         menu.products.push(newProduct);
         await menu.save();
