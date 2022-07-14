@@ -4,6 +4,7 @@ const { createServer } = require('http');
 const { Server } = require('socket.io');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const path = require('path')
 
 const { dbConnector } = require('./data-access');
 const socketControl = require('./socket-control');
@@ -58,6 +59,13 @@ class ServerModel {
         this.app.use('/api/table', tableRouter);
         this.app.use('/api/auth', authRouter);
         this.app.use('/api/menu', menuRouter);
+        this.app.get('/*', (req, res) => {
+            res.sendFile(path.join(__dirname, '../public/index.html'), (err) => {
+                if (err) {
+                    res.status(500).send(err)
+                }
+            })
+        })
     }
 
     listen() {
