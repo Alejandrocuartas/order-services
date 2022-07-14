@@ -28,11 +28,9 @@ const orderSchema = new Schema({
 const tableSchema = new Schema({
     number: {
         type: Number,
-        required: [true, 'The number of the table is required'],
     },
     qr: {
         type: String,
-        required: [true, 'The qr url is required.'],
     },
 });
 
