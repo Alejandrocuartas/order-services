@@ -3,7 +3,7 @@ const { Menu } = require('../../entities');
 const getProducts = async (companyId) => {
     try {
         const menu = await Menu.findOne({ companyId });
-        if (!menu) {
+        if (!menu || menu.id.toString() !== companyId) {
             throw new Error('There is not menu yet.');
         }
         return menu;
