@@ -4,6 +4,7 @@ const { request, response } = require('express');
 /* eslint-disable default-param-last */
 const session = (req = request, res = response, next) => {
     const token = req.cookies.userToken;
+    console.log(token)
     if (!token) {
         return res.status(401).json({
             msg: 'User is not logged',

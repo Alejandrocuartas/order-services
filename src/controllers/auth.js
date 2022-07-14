@@ -43,6 +43,7 @@ const getAuthData = async (req = request, res = response) => {
                 companyData,
             });
     } catch (error) {
+        console.log(error.message)
         res.status(500).json({
             message: 'could not get company info',
             error: error.message,
