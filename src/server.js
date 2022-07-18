@@ -17,6 +17,7 @@ const {
 
 class ServerModel {
     constructor() {
+        this.origin = 'http://localhost:8080';
         this.app = express();
         this.port = process.env.PORT;
         this.server = createServer(this.app);
@@ -42,6 +43,7 @@ class ServerModel {
         this.app.use(express.json());
         this.app.use(cors({
             credentials: true,
+            origin: this.origin,
         }));
         this.app.use(cookieParser());
         this.app.use(fileUpload({
