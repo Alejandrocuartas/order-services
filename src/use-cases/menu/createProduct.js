@@ -10,7 +10,7 @@ const createProduct = async (company, imgPath, name, description, price = 0) => 
             name,
             image,
             price,
-            description
+            description,
         };
         menu.products.push(newProduct);
         await menu.save();
