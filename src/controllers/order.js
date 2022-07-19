@@ -5,7 +5,7 @@ const { createOrder, payOrder } = require('../use-cases');
 const postOrder = async (req = request, res = response) => {
     try {
         const { companyId } = req.body;
-        const { products, table } = req.body;
+        const { products, table, petition } = req.body;
         let totalPrice = 0;
         if (products[0].price) {
             const prices = products.map((product) => product.price * product.amount);
@@ -19,6 +19,7 @@ const postOrder = async (req = request, res = response) => {
             table,
             products: productsList,
             price: totalPrice,
+            petition
         });
         if (created) {
             return res.json({

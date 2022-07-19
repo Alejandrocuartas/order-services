@@ -12,6 +12,9 @@ const orderSchema = new Schema({
         type: Number,
         required: [true, 'The number of the table of the order is required'],
     },
+    petition: {
+        type: String,
+    },
     received: {
         type: Boolean,
         default: false,
