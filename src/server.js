@@ -17,6 +17,7 @@ const {
 
 class ServerModel {
     constructor() {
+        this.origin = 'http://localhost:8080';
         this.app = express();
         this.port = process.env.PORT;
         this.server = createServer(this.app);
@@ -38,10 +39,11 @@ class ServerModel {
     }
 
     middlewares() {
-        this.app.use(express.static('public'));
+        this.app.use(express.static('docs'));
         this.app.use(express.json());
         this.app.use(cors({
             credentials: true,
+            origin: this.origin,
         }));
         this.app.use(cookieParser());
         this.app.use(fileUpload({
@@ -60,7 +62,7 @@ class ServerModel {
         this.app.use('/api/auth', authRouter);
         this.app.use('/api/menu', menuRouter);
         this.app.get('/*', (req, res) => {
-            res.sendFile(path.join(__dirname, '../public/index.html'), (err) => {
+            res.sendFile(path.join(__dirname, '../docs/index.html'), (err) => {
                 if (err) {
                     res.status(500).send(err);
                 }

@@ -2,10 +2,10 @@ const { Menu } = require('../../entities');
 
 const { deleteImage } = require('../../helpers');
 
-const deletProduct = async (companyId, productId) => {
+const deletProduct = async (company, productId) => {
     try {
-        const menu = await Menu.findOne({ companyId });
-        if (menu.company.toString() !== companyId) {
+        const menu = await Menu.findOne({ company });
+        if (menu.company.toString() !== company) {
             throw new Error('The id of the company is not the same as the menu s');
         }
         let urlImage;
@@ -15,7 +15,9 @@ const deletProduct = async (companyId, productId) => {
             }
             return product.id !== productId;
         });
-        await deleteImage(urlImage);
+        if(urlImage){
+            await deleteImage(urlImage);
+        }
         menu.products = resultingProducts;
         await menu.save();
         return resultingProducts;
