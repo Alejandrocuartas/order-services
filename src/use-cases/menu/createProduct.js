@@ -4,7 +4,10 @@ const { uploadImage } = require('../../helpers');
 
 const createProduct = async (company, imgPath, name, description, price = 0) => {
     try {
-        const image = await uploadImage(imgPath);
+        let image = '';
+        if(imgPath){
+            image = await uploadImage(imgPath);
+        }
         const menu = await Menu.findOne({ company });
         const newProduct = {
             name,

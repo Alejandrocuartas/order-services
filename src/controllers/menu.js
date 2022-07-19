@@ -72,10 +72,14 @@ const deleteMenu = async (req = request, res = response) => {
 
 const postProduct = async (req = request, res = response) => {
     try {
-        const { tempFilePath } = req.files.productImage;
+        let imagePath = '';
+        if(req.files){
+            const { tempFilePath } = req.files.productImage;
+            imagePath = tempFilePath
+        }
         const { companyId } = req;
         const { name, price, description } = req.body;
-        const products = await createProduct(companyId, tempFilePath, name, description, price);
+        const products = await createProduct(companyId, imagePath, name, description, price);
         res.status(200).json({
             message: 'Product created correctly',
             products,
