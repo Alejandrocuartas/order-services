@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { session } = require('../middlewares');
-const { postOrder, paidOrder } = require('../controllers/order');
+const { postOrder, paidOrder, patchOrder } = require('../controllers/order');
 
 const router = Router();
 
@@ -16,5 +16,10 @@ router.post('/', [
 router.delete('/', [
     session,
 ], paidOrder);
+
+router.patch('/', [
+    session,
+    check('orderId', 'The orderId is required').not().isEmpty(),
+], patchOrder);
 
 module.exports = router;

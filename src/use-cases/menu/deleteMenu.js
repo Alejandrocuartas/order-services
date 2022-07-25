@@ -6,7 +6,7 @@ const deletMenu = async (company) => {
         const menu = await Menu.findOneAndDelete({ company });
         const { products } = menu;
         for (const p of products) {
-            if(p.image){
+            if (p.image) {
                 deleteImage(p.image);
             }
         }

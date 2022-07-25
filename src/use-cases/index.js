@@ -15,6 +15,7 @@ const getOrder = require('./order/getOrder');
 const payOrder = require('./order/payOrder');
 const getProducts = require('./menu/getProducts');
 const getCompanyData = require('./auth/getCompanyData');
+const patchOrd = require('./order/patchOrd');
 
 module.exports = {
     googleAuth,
@@ -34,4 +35,5 @@ module.exports = {
     payOrder,
     getProducts,
     getCompanyData,
+    patchOrd,
 };
