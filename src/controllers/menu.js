@@ -73,9 +73,9 @@ const deleteMenu = async (req = request, res = response) => {
 const postProduct = async (req = request, res = response) => {
     try {
         let imagePath = '';
-        if(req.files){
+        if (req.files) {
             const { tempFilePath } = req.files.productImage;
-            imagePath = tempFilePath
+            imagePath = tempFilePath;
         }
         const { companyId } = req;
         const { name, price, description } = req.body;

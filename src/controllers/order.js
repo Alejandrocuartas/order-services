@@ -1,6 +1,6 @@
 const { request, response } = require('express');
 
-const { createOrder, payOrder } = require('../use-cases');
+const { createOrder, payOrder, patchOrd } = require('../use-cases');
 
 const postOrder = async (req = request, res = response) => {
     try {
@@ -19,7 +19,7 @@ const postOrder = async (req = request, res = response) => {
             table,
             products: productsList,
             price: totalPrice,
-            petition
+            petition,
         });
         if (created) {
             return res.json({
@@ -53,7 +53,24 @@ const paidOrder = async (req = request, res = response) => {
     }
 };
 
+const patchOrder = async (req = request, res = response) => {
+    try {
+        const { companyId } = req;
+        const { orderId } = req.body;
+        const orders = await patchOrd(companyId, orderId);
+        return res.status(200).json({
+            orders,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Could not edit order status.',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     postOrder,
     paidOrder,
+    patchOrder,
 };

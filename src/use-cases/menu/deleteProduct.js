@@ -15,7 +15,7 @@ const deletProduct = async (company, productId) => {
             }
             return product.id !== productId;
         });
-        if(urlImage){
+        if (urlImage) {
             await deleteImage(urlImage);
         }
         menu.products = resultingProducts;

@@ -7,8 +7,8 @@
     "start": "node ./src/app.js",
     "start:dev": "nodemon ./src/app.js",
     "test": "jest",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint ./src/",
+    "lint:fix": "eslint ./src/ --fix"
   },
   "author": "Alejandro Cuartas",
   "license": "ISC",
