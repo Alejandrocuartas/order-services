@@ -26,6 +26,16 @@ const orderSchema = new Schema({
     price: {
         type: Number,
     },
+    isDelivery: {
+        type: Boolean,
+        default: false,
+    },
+    adress: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
 });
 
 const tableSchema = new Schema({
@@ -58,6 +68,9 @@ const companySchema = new Schema({
     active: {
         type: Boolean,
         default: true,
+    },
+    delivery: {
+        type: String,
     },
 });
 
