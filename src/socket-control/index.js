@@ -18,6 +18,25 @@ const socketControl = (socket) => {
             });
         }
     });
+    socket.on('get-deliveries', async (jwt, callback) => {
+        try {
+            const companyId = sessionHandler(jwt);
+            const orders = await getOrder(companyId, true);
+            callback({
+                orders,
+                error: false,
+            });
+        } catch (error) {
+            callback({
+                error: true,
+                message: error.message,
+                orders: [],
+            });
+        }
+    });
+    socket.on('new-delivery', (orders) => {
+        socket.broadcast.emit('new-deliveries', orders);
+    });
     socket.on('new-order', (orders) => {
         socket.broadcast.emit('new-orders', orders);
     });
