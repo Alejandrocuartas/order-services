@@ -8,6 +8,7 @@ const deletMenu = require('./menu/deleteMenu');
 const createProduct = require('./menu/createProduct');
 const deletProduct = require('./menu/deleteProduct');
 const editProduct = require('./menu/editProduct');
+const editProductStatus = require('./menu/editProductStatus');
 const existingProduct = require('./middlewares/existProduct');
 const existingTable = require('./middlewares/existTable');
 const createOrder = require('./order/createOrder');
@@ -28,6 +29,7 @@ module.exports = {
     createProduct,
     deletProduct,
     editProduct,
+    editProductStatus,
     existingProduct,
     existingTable,
     createOrder,

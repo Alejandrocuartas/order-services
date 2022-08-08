@@ -6,6 +6,7 @@ const {
     createProduct,
     deletProduct,
     editProduct,
+    editProductStatus,
     getProducts,
 } = require('../use-cases');
 
@@ -127,12 +128,30 @@ const patchProduct = async (req = request, res = response) => {
     }
 };
 
+const patchStatusProduct = async (req = request, res = response) => {
+    try {
+        const { companyId } = req;
+        const { id } = req.params;
+        const product = await editProductStatus(companyId, id);
+        res.status(200).json({
+            message: 'product status updated correctly.',
+            product,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Could not update product',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     postMenu,
     deleteMenu,
     postProduct,
     deleteProduct,
     patchProduct,
+    patchStatusProduct,
     getMenu,
     getMenuClient,
 };

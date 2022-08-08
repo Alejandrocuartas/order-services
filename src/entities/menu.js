@@ -14,6 +14,10 @@ const productSchema = new Schema({
     price: {
         type: Number,
     },
+    available: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 const menuSchema = new Schema({
