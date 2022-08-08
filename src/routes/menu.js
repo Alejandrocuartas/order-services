@@ -8,6 +8,7 @@ const {
     postProduct,
     deleteProduct,
     patchProduct,
+    patchStatusProduct,
     getMenu,
     getMenuClient,
 } = require('../controllers/menu');
@@ -47,5 +48,10 @@ router.patch('/product/:id', [
     check('newPrice', 'The new price is required').not().isEmpty(),
     check('newPrice', 'The new price must be a number').isNumeric(),
 ], patchProduct);
+
+router.patch('/product/status/:id', [
+    session,
+    existProduct,
+], patchStatusProduct);
 
 module.exports = router;
